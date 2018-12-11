@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Score } from './score.model';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -32,48 +34,85 @@ export class HomePage {
   // font size
   fontSize: number;
 
-  score: string;
+  players: string[];
 
+  scores: Score[];
+
+  currentScore: number;
+  currentDart: number;
 
   ngOnInit() {
+    // draw
     this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
     this.canvas.width = window.innerWidth;
     this.canvas.height = this.canvas.width;
     this.context = this.canvas.getContext("2d");
     this.fontSize = (this.canvas.width / 20);
     this.draw();
+
+    // init players
+    this.players = [ "John", "Paul", "Marie" ];
+    this.currentDart = 0;
+    this.currentScore = 0;
+    this.scores = [];
+    this.players.forEach(e => {
+      this.scores.push({ 
+        player: e,
+        dart1: null,
+        dart2: null,
+        dart3: null,
+      })
+    });
   }
 
-  printPoints(event: MouseEvent) {
+  play(event: MouseEvent) {
+    this.currentDart++;
+    if (this.currentDart > 3) {
+      this.currentScore++;
+      this.currentDart = 1;
+
+      if (this.currentScore >= this.players.length) {
+        this.currentScore = 0;
+      }
+
+      this.scores[this.currentScore] = { 
+        player: this.players[this.currentScore],    
+        dart1: null,
+        dart2: null,
+        dart3: null,
+      };
+    }
+
+    let scoreObj = this.scores[this.currentScore];
+    let point = this.getPoints(event);
+    scoreObj["dart" + this.currentDart] = point;
+  }
+
+  getPoints(event: MouseEvent) {
     let numbers = [1, 18, 4, 13, 6, 10, 15, 2, 17, 3, 19, 7, 16, 8, 11, 14, 9, 12, 5, 20];
-    console.log(event);
     let x = event.offsetX;
     let y = event.offsetY;
     let radius = this.getRadius();
     let distanceFromMiddle = Math.sqrt(Math.pow(this.canvas.width / 2 - x, 2) + Math.pow(this.canvas.height / 2 - y, 2));
     
-    let double = "";
+    let multiplier = 0;
     let point = null;
     
     // compute triple, double...
     if (distanceFromMiddle < radius * this.centerWidth)  {
-      console.log("BOOM RIGHT IN THE MIDDLE");
+      multiplier = 1;
       point = 50;
     } else if (distanceFromMiddle < radius * this.outerCenterWidth) {
-      console.log("BOOM RIGHT IN THE 25");
+      multiplier = 1;
       point = 25;
     } else if (distanceFromMiddle < radius * this.doubleWidth) {
-      console.log("BOOM RIGHT IN THE normal");
+      multiplier = 1;
     } else if (distanceFromMiddle < radius * this.tripleDoubleSpaceWidth) {
-      console.log("BOOM RIGHT IN THE TRIPLE");
-      double = "TRIPLE ";
+      multiplier = 3;
     } else if (distanceFromMiddle < radius * this.tripleWidth) {
-      console.log("BOOM RIGHT IN THE normal");
+      multiplier = 1;
     } else if (distanceFromMiddle < radius * this.outerWidth) {
-      console.log("BOOM RIGHT IN THE DOUBLE");
-      double = "DOUBLE ";
-    } else {
-      console.log("BOOM RIGHT IN THE NOTHING");
+      multiplier = 2;
     }
 
     // get the points
@@ -81,12 +120,9 @@ export class HomePage {
     if (angleDeg < 0) {
       angleDeg += 360;
     }
-    //console.log(angleDeg);
-    //console.log(numbers[(angleDeg / 18) | 0]);
-    point = point || numbers[(angleDeg / 18) | 0];
-    console.log(double + point);
-    this.score = double + point;
 
+    point = point || numbers[(angleDeg / 18) | 0];
+    return multiplier * point;
   }
 
   getRadius() {
