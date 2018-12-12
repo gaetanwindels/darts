@@ -51,7 +51,7 @@ export class HomePage {
     this.draw();
 
     // init players
-    this.players = [ "John", "Paul", "Marie" ];
+    this.players = [ "John", "Paul", "Marie", "François" ];
     this.currentDart = 0;
     this.currentScore = 0;
     this.scores = [];
@@ -61,31 +61,47 @@ export class HomePage {
         dart1: null,
         dart2: null,
         dart3: null,
+        remaining: 501
       })
     });
   }
 
+  isSelected(score) {
+    debugger;
+    return score.player === this.scores[this.currentScore].player;
+  }
+
   play(event: MouseEvent) {
-    this.currentDart++;
-    if (this.currentDart > 3) {
+    this.currentDart++; // starts at 1
+
+    let scoreObj = this.scores[this.currentScore];
+    let point = this.getPoints(event);
+    scoreObj["dart" + this.currentDart] = point;
+    let remaining = scoreObj.remaining - point;
+    if (remaining < 0) {
+      
+    } else if (remaining === 0) {
+      console.log("WIN IF DOUBLE");
+    } else {
+      scoreObj.remaining = remaining;
+    }
+
+    if (this.currentDart >= 3) {
       this.currentScore++;
-      this.currentDart = 1;
+      this.currentDart = 0;
 
       if (this.currentScore >= this.players.length) {
         this.currentScore = 0;
       }
 
-      this.scores[this.currentScore] = { 
-        player: this.players[this.currentScore],    
-        dart1: null,
-        dart2: null,
-        dart3: null,
-      };
+      this.scores[this.currentScore].dart1 = null;
+      this.scores[this.currentScore].dart2 = null;
+      this.scores[this.currentScore].dart3 = null;
     }
+  }
 
-    let scoreObj = this.scores[this.currentScore];
-    let point = this.getPoints(event);
-    scoreObj["dart" + this.currentDart] = point;
+  goToNextPlayer() {
+
   }
 
   getPoints(event: MouseEvent) {

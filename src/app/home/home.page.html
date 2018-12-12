@@ -2,25 +2,27 @@
   <canvas (click)="play($event)" id="canvas" height="500" width="500"></canvas>
 </div>
 
-<div class="scoreboard">
-  <ion-row *ngFor="let score of scores">
-    <ion-col>
-      {{ score.player }}
-    </ion-col>
-    <ion-col>
-      {{ score.dart1 }}
-    </ion-col>
-    <ion-col>
-      {{ score.dart2 }}
-    </ion-col>
-    <ion-col>
-      {{ score.dart3 }}
-    </ion-col>
-    <ion-col>
-        {{ score.dart1 + score.dart2 + score.dart3 }}
-    </ion-col>
-    <ion-col>
-        501
-    </ion-col>
+<ion-content>
+  <ion-row>
+    Scoreboard
   </ion-row>
-</div>
+  <ion-grid>
+    <ion-row [ngClass]="{ selected: isSelected(score) }" class="scoreboard-col" *ngFor="let score of scores">
+      <ion-col size="4">
+        {{ score.player }}
+      </ion-col>
+      <ion-col>
+        {{ score.dart1 }}
+      </ion-col>
+      <ion-col>
+        {{ score.dart2 }}
+      </ion-col>
+      <ion-col>
+        {{ score.dart3 }}
+      </ion-col>
+      <ion-col>
+          {{ score.remaining }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

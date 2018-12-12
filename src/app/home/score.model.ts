@@ -3,4 +3,5 @@ export interface Score {
     dart2?: number;
     dart3?: number;
     player: string;
+    remaining: number;
 }
