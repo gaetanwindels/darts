@@ -8,11 +8,18 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MenuComponent } from './menu/menu.component';
+
+import { MatListModule, MatGridListModule, MatButtonModule, MatCheckboxModule, MatToolbarModule, MatCardModule, MatExpansionModule } from '@angular/material';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MenuComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [MatListModule, BrowserAnimationsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    MatButtonModule, MatCheckboxModule, MatToolbarModule, MatCardModule, MatExpansionModule, MatGridListModule],
+  exports: [MatButtonModule, MatCheckboxModule, MatToolbarModule, MatCardModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -20,4 +27,4 @@ import { AppComponent } from './app.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
