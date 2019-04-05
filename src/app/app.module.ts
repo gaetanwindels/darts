@@ -9,13 +9,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
+import { HomePage } from './home/home.page';
 
 import { MatListModule, MatGridListModule, MatButtonModule, MatCheckboxModule, MatToolbarModule, MatCardModule, MatExpansionModule } from '@angular/material';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent],
+  declarations: [AppComponent, MenuComponent, HomePage],
   entryComponents: [],
   imports: [MatListModule, BrowserAnimationsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     MatButtonModule, MatCheckboxModule, MatToolbarModule, MatCardModule, MatExpansionModule, MatGridListModule],
