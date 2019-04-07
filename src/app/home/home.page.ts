@@ -20,16 +20,16 @@ export class HomePage {
   colorWhite: string = "#f3f6e5";
 
   // Size conf
-  outerWidth: number = 0.8;
+  outerWidth: number = 0.85;
 
-  tripleWidth: number = 0.65;
+  tripleWidth: number = 0.67;
   tripleDoubleSpaceWidth = 0.48;
-  doubleWidth: number = 0.34;
-  outerCenterWidth: number = 0.17;
-  centerWidth: number = 0.08;
+  doubleWidth: number = 0.30;
+  outerCenterWidth: number = 0.21;
+  centerWidth: number = 0.1;
 
   // position
-  positionX: number = 0.2;
+  positionX: number = 0.01;
 
   // font size
   fontSize: number;
@@ -66,9 +66,8 @@ export class HomePage {
     });
   }
 
-  isSelected(score) {
-    debugger;
-    return score.player === this.scores[this.currentScore].player;
+  isSelected(index) {
+    return index === this.currentScore;
   }
 
   play(event: MouseEvent) {
@@ -217,7 +216,7 @@ export class HomePage {
     for (let i = 0; i < 20; i++) {
       //radian = (i * 18) * Math.PI / 180;
       this.context.rotate(radian);
-      this.context.fillText("" + numbers[i], 0, - radius + radius / 7.5);
+      this.context.fillText("" + numbers[i], 0, - radius + radius / 8.2);
     }
     this.context.restore();
   }

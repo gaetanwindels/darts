@@ -1,4 +1,9 @@
 #canvas-wrapper {
+    margin-bottom: -4px;
+}
+
+#canvas {
+    background: url(../../assets/cork-background.jpg);
 }
 
 .scoreboard {
@@ -6,12 +11,27 @@
     bottom: 150px;
 }
 
-.scoreboard-col ion-col {
-    border: 1px black solid;
+.scoreboard-title {
+    border-top: 1px black solid;
+}
+
+.scoreboard-row ion-col:not(:last-child) {
+    border-right: 1px black solid;
+
+}
+
+.scoreboard-row ion-col {
+    padding: 10px;
     opacity: 0.7;
+}
+
+
+.scoreboard-row {
+    border-bottom: 1px black solid;
 }
 
 .selected {
     opacity: 1;
     background: lightgray;
+    font-weight: bold;
 }
