@@ -51,12 +51,12 @@ export class HomePage {
     this.draw();
 
     // init players
-    this.players = [ "John", "Paul", "Marie", "François" ];
+    this.players = ["John", "Paul", "Marie", "François"];
     this.currentDart = 0;
     this.currentScore = 0;
     this.scores = [];
     this.players.forEach(e => {
-      this.scores.push({ 
+      this.scores.push({
         player: e,
         dart1: null,
         dart2: null,
@@ -66,8 +66,13 @@ export class HomePage {
     });
   }
 
+<<<<<<< HEAD
   isSelected(index) {
     return index === this.currentScore;
+=======
+  isSelected(score) {
+    return score.player === this.scores[this.currentScore].player;
+>>>>>>> d2beac5519747c588b3f08d5eda5f20d74671f69
   }
 
   play(event: MouseEvent) {
@@ -78,7 +83,7 @@ export class HomePage {
     scoreObj["dart" + this.currentDart] = point;
     let remaining = scoreObj.remaining - point;
     if (remaining < 0) {
-      
+
     } else if (remaining === 0) {
       console.log("WIN IF DOUBLE");
     } else {
@@ -109,12 +114,12 @@ export class HomePage {
     let y = event.offsetY;
     let radius = this.getRadius();
     let distanceFromMiddle = Math.sqrt(Math.pow(this.canvas.width / 2 - x, 2) + Math.pow(this.canvas.height / 2 - y, 2));
-    
+
     let multiplier = 0;
     let point = null;
-    
+
     // compute triple, double...
-    if (distanceFromMiddle < radius * this.centerWidth)  {
+    if (distanceFromMiddle < radius * this.centerWidth) {
       multiplier = 1;
       point = 50;
     } else if (distanceFromMiddle < radius * this.outerCenterWidth) {
