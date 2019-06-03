@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
-import { Score } from './score.model';
+import { Score, ScoreHistory, Throw } from './score.model';
+import { SelectedPlayersService } from 'src/app/shared/services/selected-players.service';
+import { ScoreService } from 'src/app/shared/services/score.service';
 
 @Component({
   selector: 'app-home',
@@ -29,86 +31,91 @@ export class HomePage {
   centerWidth: number = 0.1;
 
   // position
-  positionX: number = 0.01;
+  positionX: number = 0.1;
 
   // font size
   fontSize: number;
 
   players: string[];
 
-  scores: Score[];
+  scores: ScoreHistory[];
 
-  currentScore: number;
-  currentDart: number;
+  currentScores: ScoreHistory;
+
+  points = 0;
+
+  dataSource = [{ "first": 12, "second": 12, "third": 12 }];
+  displayedColumns: string[] = ['first', 'second', 'third', 'total'];
+
+  constructor(private selectedPlayersService: SelectedPlayersService, private scoreService: ScoreService) {
+
+  }
 
   ngOnInit() {
     // draw
     this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = this.canvas.width;
+    this.canvas.height = window.innerHeight / 2
+    this.canvas.width = this.canvas.height
     this.context = this.canvas.getContext("2d");
     this.fontSize = (this.canvas.width / 20);
     this.draw();
 
     // init players
-    this.players = ["John", "Paul", "Marie", "François"];
-    this.currentDart = 0;
-    this.currentScore = 0;
+    this.players = this.selectedPlayersService.getPlayers();
     this.scores = [];
     this.players.forEach(e => {
       this.scores.push({
         player: e,
-        dart1: null,
-        dart2: null,
-        dart3: null,
-        remaining: 501
+        scores: []
       })
     });
+
+    this.currentScores = this.scores[0];
   }
 
-<<<<<<< HEAD
   isSelected(index) {
-    return index === this.currentScore;
-=======
-  isSelected(score) {
-    return score.player === this.scores[this.currentScore].player;
->>>>>>> d2beac5519747c588b3f08d5eda5f20d74671f69
+    //return index === this.currentScore;
   }
 
   play(event: MouseEvent) {
-    this.currentDart++; // starts at 1
-
-    let scoreObj = this.scores[this.currentScore];
-    let point = this.getPoints(event);
-    scoreObj["dart" + this.currentDart] = point;
-    let remaining = scoreObj.remaining - point;
-    if (remaining < 0) {
-
-    } else if (remaining === 0) {
-      console.log("WIN IF DOUBLE");
-    } else {
-      scoreObj.remaining = remaining;
+    if (this.scoreService.isNextPlayer(this.currentScores) || this.scoreService.isOver(this.currentScores)) {
+      return;
     }
 
-    if (this.currentDart >= 3) {
-      this.currentScore++;
-      this.currentDart = 0;
-
-      if (this.currentScore >= this.players.length) {
-        this.currentScore = 0;
-      }
-
-      this.scores[this.currentScore].dart1 = null;
-      this.scores[this.currentScore].dart2 = null;
-      this.scores[this.currentScore].dart3 = null;
+    this.scoreService.addPoints(this.currentScores, this.getPoints(event));
+    if (this.scoreService.hasWon(this.currentScores)) {
+      alert("WONERED");
     }
+  }
+
+  getCurrentScore() {
+    return this.currentScores && [...this.currentScores.scores].pop() || {};
+  }
+
+  getNextPlayerName() {
+    let index = this.scores.findIndex(score => score.player === this.currentScores.player);
+    return this.scores[(index + 1) % this.scores.length].player;
+  }
+
+  getRemaining() {
+    return this.scoreService.getRemaining(this.currentScores);
+  }
+
+  isNextPlayer() {
+    return this.scoreService.isNextPlayer(this.currentScores) || this.scoreService.isOver(this.currentScores);
+  }
+
+  removeLastThrow() {
+    this.scoreService.removeLastThrow(this.currentScores);
   }
 
   goToNextPlayer() {
-
+    let index = this.scores.findIndex(score => score.player === this.currentScores.player);
+    this.currentScores.scores.push({});
+    this.currentScores = this.scores[(index + 1) % this.scores.length];
   }
 
-  getPoints(event: MouseEvent) {
+  getPoints(event: MouseEvent): Throw {
     let numbers = [1, 18, 4, 13, 6, 10, 15, 2, 17, 3, 19, 7, 16, 8, 11, 14, 9, 12, 5, 20];
     let x = event.offsetX;
     let y = event.offsetY;
@@ -142,12 +149,14 @@ export class HomePage {
     }
 
     point = point || numbers[(angleDeg / 18) | 0];
-    return multiplier * point;
+    return { multiplicator: multiplier, points: point };
   }
 
   getRadius() {
     return this.canvas.width * (0.5 - (this.positionX / 2));
   }
+
+  // Drawing part of the component 
 
   draw() {
     let radius = this.getRadius();

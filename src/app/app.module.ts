@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -8,19 +9,22 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MenuComponent } from './menu/menu.component';
-import { HomePage } from './home/home.page';
+import { MenuComponent } from './screens/menu/menu.component';
+import { HomePage } from './screens/home/home.page';
+import { ManagePlayersComponent } from './screens/manage-players/manage-players.component';
+import { SelectPlayersComponent } from './screens/select-players/select-players.component';
+import { ManagePlayersDialog } from './screens/manage-players/manage-players.dialog';
 
-import { MatListModule, MatGridListModule, MatButtonModule, MatCheckboxModule, MatToolbarModule, MatCardModule, MatExpansionModule } from '@angular/material';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MaterialModule } from './material.module';
+
 @NgModule({
-  declarations: [AppComponent, MenuComponent, HomePage],
-  entryComponents: [],
-  imports: [MatListModule, BrowserAnimationsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-    MatButtonModule, MatCheckboxModule, MatToolbarModule, MatCardModule, MatExpansionModule, MatGridListModule],
-  exports: [MatButtonModule, MatCheckboxModule, MatToolbarModule, MatCardModule],
+  declarations: [AppComponent, MenuComponent, HomePage, ManagePlayersComponent, SelectPlayersComponent, ManagePlayersDialog],
+  entryComponents: [ManagePlayersDialog],
+  imports: [MaterialModule, BrowserAnimationsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
+  exports: [],
   providers: [
     StatusBar,
     SplashScreen,

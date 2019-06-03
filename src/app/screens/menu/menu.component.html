@@ -2,8 +2,8 @@
   <span>Dart scoreboard</span>
 </mat-toolbar>
 
-<mat-card>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+<mat-card routerLink="manage-players">
+  <img style="opacity:0.8" mat-card-image src="assets/people-playing.jpg" alt="Photo of people">
   <mat-card-header color="primary">
 
     <mat-card-title>
@@ -32,21 +32,15 @@
     <button mat-raised-button color="primary">MANAGE TEAMS</button>
   </mat-card-actions> -->
 </mat-card>
-<mat-card>
+<mat-card routerLink="select-players">
+  <img style="opacity:0.8" mat-card-image src="assets/people-playing.jpg" alt="Photo of a Shiba Inu">
   <mat-card-header>
     <mat-card-title>
       Play
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-list role="list">
-      <mat-list-item role="listitem" routerLink="play">
-        501
-      </mat-list-item>
-      <mat-list-item role="listitem" routerLink="play">
-        301
-      </mat-list-item>
-    </mat-list>
+    Play a variety of games like 301, 501 and more
   </mat-card-content>
 </mat-card>
 

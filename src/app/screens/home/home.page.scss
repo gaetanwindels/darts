@@ -1,9 +1,11 @@
 #canvas-wrapper {
-    margin-bottom: -4px;
+    width: 100%;
+   text-align:center;
 }
 
 #canvas {
-    background: url(../../assets/cork-background.jpg);
+    //background: url(../../../assets/cork-background.jpg);
+    display: inline;
 }
 
 .scoreboard {
@@ -34,4 +36,8 @@
     opacity: 1;
     background: lightgray;
     font-weight: bold;
+}
+
+table {
+    width: 100%;
 }

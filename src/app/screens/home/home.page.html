@@ -1,0 +1,54 @@
+<div id="canvas-wrapper">
+  <canvas (click)="play($event)" id="canvas" height="500" width="500"></canvas>
+</div>
+
+<div style="padding:0px 16px">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ currentScores.player }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ getRemaining() }} points remaining
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="getCurrentScore() as score"></div>
+      {{ getCurrentScore().throw1 ? getCurrentScore().throw1.points * getCurrentScore().throw1.multiplicator  : '?' }} -
+      {{ getCurrentScore().throw2 ? getCurrentScore().throw2.points * getCurrentScore().throw2.multiplicator  : '?' }} -
+      {{ getCurrentScore().throw3 ? getCurrentScore().throw3.points * getCurrentScore().throw3.multiplicator : '?' }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions align="end">
+      <button (click)="removeLastThrow()" mat-icon-button color="primary">
+        <mat-icon>reply</mat-icon>
+      </button>
+      <button [disabled]="!isNextPlayer()" mat-flat-button color="primary"
+        (click)="goToNextPlayer()">{{ getNextPlayerName() }} <mat-icon>navigate_next</mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+
+<!-- <ion-content>
+  <ion-grid no-padding>
+    <ion-row [ngClass]="{ selected: isSelected(i) }" class="scoreboard-row" *ngFor="let score of scores,let i = index">
+      <ion-col size="4">
+        {{ score.player }}
+      </ion-col>
+      <ion-col>
+        {{ score.dart1 }}
+      </ion-col>
+      <ion-col>
+        {{ score.dart2 }}
+      </ion-col>
+      <ion-col>
+        {{ score.dart3 }}
+      </ion-col>
+      <ion-col>
+          {{ score.remaining }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content> -->

@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <span>Dart scoreboard</span>
+</mat-toolbar>
+<mat-selection-list [(ngModel)]="selectedPlayers">
+  <mat-list-option *ngFor="let player of players; let i of index" [value]="player">
+    <!-- <mat-icon style=" margin-right:16px">perm_identity</mat-icon> -->
+    {{ player }}
+  </mat-list-option>
+</mat-selection-list>
+
+<button color="primary" [disabled]="!selectedPlayers.length" class="btn-validate" mat-raised-button
+  (click)="validate()">Valider</button>

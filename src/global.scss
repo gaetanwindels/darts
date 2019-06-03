@@ -11,3 +11,27 @@
 // @import '~@ionic/angular/css/flex-utils.css';
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+ion-router-outlet {
+    //background: #BEAD62;;
+}
+
+.mat-card-header-text {
+    margin: 0!important;
+}
+
+.ml-auto {
+    margin-left: auto!important;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.btn-validate {
+    position: fixed!important;
+    bottom: 16px;
+    width: calc(100% - 32px);
+    left: 16px;
+    right: 16px;
+}

@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <span>Dart scoreboard</span>
+</mat-toolbar>
+<mat-list>
+  <mat-list-item>
+    <!-- <mat-form-field>
+      <input [(ngModel)]="newPlayer" type="text" matInput placeholder="Ajouter un joueur">
+    </mat-form-field> -->
+    <button color="primary" class="full-width" mat-stroked-button (click)="openDialog()">AJOUTER UN JOUEUR</button>
+  </mat-list-item>
+  <mat-list-item *ngFor="let player of players; let i = index">
+    <mat-icon style="margin-right:16px">perm_identity</mat-icon>
+    {{ player }}
+    <button mat-icon-button class="ml-auto" color="warn" (click)="deletePlayer(i)"
+      aria-label="Example icon-button with a heart icon">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-list>
+<button color="primary" class="btn-validate" mat-raised-button routerLink="">VALIDER</button>
