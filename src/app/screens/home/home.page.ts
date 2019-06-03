@@ -24,9 +24,9 @@ export class HomePage {
   // Size conf
   outerWidth: number = 0.85;
 
-  tripleWidth: number = 0.67;
-  tripleDoubleSpaceWidth = 0.48;
-  doubleWidth: number = 0.30;
+  tripleWidth: number = 0.72;
+  tripleDoubleSpaceWidth = 0.52;
+  doubleWidth: number = 0.38;
   outerCenterWidth: number = 0.21;
   centerWidth: number = 0.1;
 
@@ -84,7 +84,7 @@ export class HomePage {
 
     this.scoreService.addPoints(this.currentScores, this.getPoints(event));
     if (this.scoreService.hasWon(this.currentScores)) {
-      alert("WONERED");
+      alert('Victoire de ' + this.currentScores.player);
     }
   }
 
@@ -182,33 +182,43 @@ export class HomePage {
     this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius * this.centerWidth, 0, Math.PI * 2);
     this.context.fillStyle = this.colorRed;
     this.context.fill();
-    return;
+    //return;
 
     // thin lines
-    this.context.strokeStyle = "#808684";
+    this.context.strokeStyle = "#ababab";
     this.context.lineWidth = 2;
     this.context.beginPath();
     this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius, 0, Math.PI * 2);
     this.context.stroke();
 
+    let outerRadius = radius * this.outerWidth;
     this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, (1 - this.doubleWidth), 0, Math.PI * 2);
+    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, outerRadius, 0, Math.PI * 2);
     this.context.stroke();
 
+    let doubleRadius = radius * this.tripleWidth;
     this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius * 0.6, 0, Math.PI * 2);
+    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, doubleRadius, 0, Math.PI * 2);
     this.context.stroke();
 
+    let tripleDoubleRadius = radius * this.tripleDoubleSpaceWidth;
     this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius * (0.6 - this.doubleWidth), 0, Math.PI * 2);
+    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, tripleDoubleRadius, 0, Math.PI * 2);
     this.context.stroke();
 
+    let tripleRadius = radius * this.doubleWidth;
     this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius * 0.2, 0, Math.PI * 2);
+    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, tripleRadius, 0, Math.PI * 2);
     this.context.stroke();
 
+    let outerCenterRadius = radius * this.outerCenterWidth;
     this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius * 0.1, 0, Math.PI * 2);
+    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, outerCenterRadius, 0, Math.PI * 2);
+    this.context.stroke();
+
+    let centerRadius = radius * this.centerWidth;
+    this.context.beginPath();
+    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, centerRadius, 0, Math.PI * 2);
     this.context.stroke();
   }
 
@@ -247,6 +257,15 @@ export class HomePage {
       this.context.moveTo(this.canvas.width / 2, this.canvas.height / 2);
       this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius, prevRadian, radian);
       this.context.fill();
+
+      this.context.strokeStyle = '#ababab';
+      this.context.lineWidth = 2;
+      this.context.beginPath();
+      let pointX = (Math.sin(radian) * (this.getRadius() * this.outerWidth));
+      let pointY = (Math.cos(radian) * (this.getRadius() * this.outerWidth);
+      this.context.moveTo(this.canvas.width / 2, this.canvas.height / 2);
+      this.context.lineTo(this.canvas.width / 2 + pointX, this.canvas.width / 2 - pointY);
+      this.context.stroke();
     }
   }
 }

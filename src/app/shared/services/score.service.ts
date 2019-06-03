@@ -6,7 +6,7 @@ import { ScoreHistory, Throw } from 'src/app/screens/home/score.model';
 })
 export class ScoreService {
 
-  private START_POINTS = 101;
+  private START_POINTS = 501;
 
   constructor() { }
 

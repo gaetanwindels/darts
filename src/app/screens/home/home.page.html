@@ -9,7 +9,7 @@
         {{ currentScores.player }}
       </mat-card-title>
       <mat-card-subtitle>
-        {{ getRemaining() }} points remaining
+        {{ getRemaining() }} points restants
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
@@ -20,8 +20,8 @@
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-actions align="end">
-      <button (click)="removeLastThrow()" mat-icon-button color="primary">
-        <mat-icon>reply</mat-icon>
+      <button (click)="removeLastThrow()" mat-button color="primary">
+        Annuler
       </button>
       <button [disabled]="!isNextPlayer()" mat-flat-button color="primary"
         (click)="goToNextPlayer()">{{ getNextPlayerName() }} <mat-icon>navigate_next</mat-icon></button>
