@@ -262,7 +262,7 @@ export class HomePage {
       this.context.lineWidth = 2;
       this.context.beginPath();
       let pointX = (Math.sin(radian) * (this.getRadius() * this.outerWidth));
-      let pointY = (Math.cos(radian) * (this.getRadius() * this.outerWidth);
+      let pointY = (Math.cos(radian) * (this.getRadius() * this.outerWidth));
       this.context.moveTo(this.canvas.width / 2, this.canvas.height / 2);
       this.context.lineTo(this.canvas.width / 2 + pointX, this.canvas.width / 2 - pointY);
       this.context.stroke();
