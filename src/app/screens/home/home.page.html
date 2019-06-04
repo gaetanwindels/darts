@@ -15,16 +15,14 @@
       <mat-card-title>
         {{ currentScores.player }}
       </mat-card-title>
-      <span class="ml-auto">
-        <mat-chip color="warn">
-          <b>{{ getRemaining() }}</b>
-        </mat-chip>
+      <span class="ml-auto" style="font-size: 30px;">
+        {{ getRemaining() }}
       </span>
       <!-- <mat-card-subtitle>
         points restants
       </mat-card-subtitle> -->
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content style="margin-top: 20px">
       <mat-chip-list>
         <mat-chip color="primary">
           <mat-icon style="margin-right: 6px">looks_one</mat-icon>
