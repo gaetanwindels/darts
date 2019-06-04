@@ -12,8 +12,35 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-ion-router-outlet {
-    //background: #BEAD62;;
+.my-full-screen-dialog {
+    height: 100vh;
+    width: 100vw !important;
+    max-width: none !important;
+    border-radius: 0!important;
+}
+
+.my-full-screen-dialog .mat-dialog-container {
+    padding: 0;
+}
+
+mat-dialog-container {
+    border-radius: 0!important;
+}
+
+.example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+.mat-raised-button, .mat-flat-button, .mat-stroked-button {
+    border-radius: 0!important;
+}
+
+.mat-card {
+    border-radius: 0!important;
 }
 
 .mat-card-header-text {

@@ -4,7 +4,7 @@
     <input matInput placeholder="Nom du joueur" [(ngModel)]="data.newPlayer" cdkFocusInitial>
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions align="end">
   <button mat-button color="primary" (click)="onNoClick()">Annuler</button>
-  <button mat-flat-button color="primary" [mat-dialog-close]="data.newPlayer">Ajouter</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data.newPlayer">Ajouter</button>
 </div>

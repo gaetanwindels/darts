@@ -19,10 +19,11 @@ import { ManagePlayersDialog } from './screens/manage-players/manage-players.dia
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material.module';
+import { ScorePlayersDialog } from './screens/home/score-players.dialog';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, HomePage, ManagePlayersComponent, SelectPlayersComponent, ManagePlayersDialog],
-  entryComponents: [ManagePlayersDialog],
+  declarations: [AppComponent, MenuComponent, HomePage, ManagePlayersComponent, SelectPlayersComponent, ManagePlayersDialog, ScorePlayersDialog],
+  entryComponents: [ManagePlayersDialog, ScorePlayersDialog],
   imports: [MaterialModule, BrowserAnimationsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
   exports: [],
   providers: [

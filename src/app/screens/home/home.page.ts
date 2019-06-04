@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Score, ScoreHistory, Throw } from './score.model';
 import { SelectedPlayersService } from 'src/app/shared/services/selected-players.service';
 import { ScoreService } from 'src/app/shared/services/score.service';
+import { ScorePlayersDialog } from './score-players.dialog';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -47,7 +49,9 @@ export class HomePage {
   dataSource = [{ "first": 12, "second": 12, "third": 12 }];
   displayedColumns: string[] = ['first', 'second', 'third', 'total'];
 
-  constructor(private selectedPlayersService: SelectedPlayersService, private scoreService: ScoreService) {
+  constructor(private selectedPlayersService: SelectedPlayersService,
+    private scoreService: ScoreService,
+    public dialog: MatDialog) {
 
   }
 
@@ -73,8 +77,15 @@ export class HomePage {
     this.currentScores = this.scores[0];
   }
 
-  isSelected(index) {
-    //return index === this.currentScore;
+  openDialog() {
+
+    const dialogRef = this.dialog.open(ScorePlayersDialog, {
+      panelClass: 'my-full-screen-dialog',
+      data: { scores: this.scores }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
   play(event: MouseEvent) {

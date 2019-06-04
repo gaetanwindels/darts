@@ -1,0 +1,13 @@
+<mat-toolbar class="mat-elevation-z2" color="primary">
+  <span>Score des joueurs</span>
+</mat-toolbar>
+<div mat-dialog-content>
+  <mat-list>
+    <mat-list-item *ngFor="let score of data.scores">
+      <mat-icon style="margin-right:16px">perm_identity</mat-icon>{{ score.player }}
+      <span class="ml-auto"><b>{{ getRemaining(score) }}</b></span>
+    </mat-list-item>
+  </mat-list>
+</div>
+<button mat-raised-button color="primary" (click)="onNoClick()" class="full-width btn-validate">RETOURNER AU
+  JEU</button>

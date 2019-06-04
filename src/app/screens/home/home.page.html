@@ -1,3 +1,10 @@
+<mat-toolbar class="mat-elevation-z2" color="primary">
+  <span>Jeu en cours</span>
+  <span class="example-spacer"></span>
+  <mat-icon class="example-icon" (click)="openDialog()" aria-hidden="false" aria-label="Example delete icon">
+    table_chart</mat-icon>
+</mat-toolbar>
+
 <div id="canvas-wrapper">
   <canvas (click)="play($event)" id="canvas" height="500" width="500"></canvas>
 </div>
@@ -8,22 +15,37 @@
       <mat-card-title>
         {{ currentScores.player }}
       </mat-card-title>
-      <mat-card-subtitle>
-        {{ getRemaining() }} points restants
-      </mat-card-subtitle>
+      <span class="ml-auto">
+        <mat-chip color="warn">
+          <b>{{ getRemaining() }}</b>
+        </mat-chip>
+      </span>
+      <!-- <mat-card-subtitle>
+        points restants
+      </mat-card-subtitle> -->
     </mat-card-header>
     <mat-card-content>
-      <div *ngIf="getCurrentScore() as score"></div>
-      {{ getCurrentScore().throw1 ? getCurrentScore().throw1.points * getCurrentScore().throw1.multiplicator  : '?' }} -
-      {{ getCurrentScore().throw2 ? getCurrentScore().throw2.points * getCurrentScore().throw2.multiplicator  : '?' }} -
-      {{ getCurrentScore().throw3 ? getCurrentScore().throw3.points * getCurrentScore().throw3.multiplicator : '?' }}
+      <mat-chip-list>
+        <mat-chip color="primary">
+          <mat-icon style="margin-right: 6px">looks_one</mat-icon>
+          {{ getCurrentScore().throw1 ? getCurrentScore().throw1.points * getCurrentScore().throw1.multiplicator  : '?' }}
+        </mat-chip>
+        <mat-chip color="primary">
+          <mat-icon style="margin-right: 6px">looks_two</mat-icon>
+          {{ getCurrentScore().throw2 ? getCurrentScore().throw2.points * getCurrentScore().throw2.multiplicator  : '?' }}
+        </mat-chip>
+        <mat-chip color="primary">
+          <mat-icon style="margin-right: 6px">looks_3</mat-icon>
+          {{ getCurrentScore().throw3 ? getCurrentScore().throw3.points * getCurrentScore().throw3.multiplicator : '?' }}
+        </mat-chip>
+      </mat-chip-list>
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-actions align="end">
       <button (click)="removeLastThrow()" mat-button color="primary">
         Annuler
       </button>
-      <button [disabled]="!isNextPlayer()" mat-flat-button color="primary"
+      <button [disabled]="!isNextPlayer()" mat-raised-button color="primary"
         (click)="goToNextPlayer()">{{ getNextPlayerName() }} <mat-icon>navigate_next</mat-icon></button>
     </mat-card-actions>
   </mat-card>

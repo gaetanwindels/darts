@@ -24,6 +24,7 @@ export class ManagePlayersComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(ManagePlayersDialog, {
+      position: { top: '100px' },
       width: '250px',
       data: { newPlayer: "" }
     });
