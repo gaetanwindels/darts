@@ -14,42 +14,14 @@ import { StorageService } from 'src/app/shared/services/storage.service';
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
+
   title = 'darts';
-
-  canvas: HTMLCanvasElement;
-
-  context: CanvasRenderingContext2D;
-
-  colorGreen: string = "#22a063";
-  colorRed: string = "#f63b1d";
-  colorBlack: string = "#373d3d";
-  colorWhite: string = "#f3f6e5";
-
-  // Size conf
-  outerWidth: number = 0.85;
-
-  tripleWidth: number = 0.72;
-  tripleDoubleSpaceWidth = 0.52;
-  doubleWidth: number = 0.38;
-  outerCenterWidth: number = 0.21;
-  centerWidth: number = 0.1;
-
-  // position
-  positionX: number = 0.1;
-
-  // font size
-  fontSize: number;
 
   players: string[];
 
   scores: ScoreHistory[];
 
   currentScores: ScoreHistory;
-
-  points = 0;
-
-  dataSource = [{ "first": 12, "second": 12, "third": 12 }];
-  displayedColumns: string[] = ['first', 'second', 'third', 'total'];
 
   constructor(private selectedPlayersService: SelectedPlayersService,
     private scoreService: ScoreService,
@@ -59,7 +31,6 @@ export class HomePage {
   }
 
   ngOnInit() {
-    // draw
     let previousGame = this.storageService.getGameState();
     if (previousGame) {
       this.scores = previousGame.scores;
@@ -136,4 +107,5 @@ export class HomePage {
     this.currentScores = this.scores[(index + 1) % this.scores.length];
     this.storeGameState();
   }
+
 }

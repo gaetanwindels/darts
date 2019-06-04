@@ -118,44 +118,32 @@ export class DartboardComponent implements OnInit {
     this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius * this.centerWidth, 0, Math.PI * 2);
     this.context.fillStyle = this.colorRed;
     this.context.fill();
-    //return;
 
     // thin lines
+    this.drawThinLines();
+  }
+
+  private drawThinLines() {
+    let radius = this.getRadius();
     this.context.strokeStyle = "#ababab";
     this.context.lineWidth = 2;
-    this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius, 0, Math.PI * 2);
-    this.context.stroke();
 
-    let outerRadius = radius * this.outerWidth;
-    this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, outerRadius, 0, Math.PI * 2);
-    this.context.stroke();
+    let posMultiplicators = [
+      1,
+      this.outerWidth,
+      this.tripleWidth,
+      this.tripleDoubleSpaceWidth,
+      this.doubleWidth,
+      this.doubleWidth,
+      this.outerCenterWidth,
+      this.centerWidth
+    ];
 
-    let doubleRadius = radius * this.tripleWidth;
-    this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, doubleRadius, 0, Math.PI * 2);
-    this.context.stroke();
-
-    let tripleDoubleRadius = radius * this.tripleDoubleSpaceWidth;
-    this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, tripleDoubleRadius, 0, Math.PI * 2);
-    this.context.stroke();
-
-    let tripleRadius = radius * this.doubleWidth;
-    this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, tripleRadius, 0, Math.PI * 2);
-    this.context.stroke();
-
-    let outerCenterRadius = radius * this.outerCenterWidth;
-    this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, outerCenterRadius, 0, Math.PI * 2);
-    this.context.stroke();
-
-    let centerRadius = radius * this.centerWidth;
-    this.context.beginPath();
-    this.context.arc(this.canvas.width / 2, this.canvas.height / 2, centerRadius, 0, Math.PI * 2);
-    this.context.stroke();
+    for (let multiplicator of posMultiplicators) {
+      this.context.beginPath();
+      this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius * multiplicator, 0, Math.PI * 2);
+      this.context.stroke();
+    }
   }
 
   private drawNumbers(radius) {
