@@ -13,6 +13,7 @@ import { MenuComponent } from './screens/menu/menu.component';
 import { HomePage } from './screens/home/home.page';
 import { ManagePlayersComponent } from './screens/manage-players/manage-players.component';
 import { SelectPlayersComponent } from './screens/select-players/select-players.component';
+import { DartboardComponent } from './shared/components/dartboard/dartboard.component';
 import { ManagePlayersDialog } from './screens/manage-players/manage-players.dialog';
 
 
@@ -22,7 +23,16 @@ import { MaterialModule } from './material.module';
 import { ScorePlayersDialog } from './screens/home/score-players.dialog';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, HomePage, ManagePlayersComponent, SelectPlayersComponent, ManagePlayersDialog, ScorePlayersDialog],
+  declarations: [
+    AppComponent,
+    MenuComponent,
+    HomePage,
+    ManagePlayersComponent,
+    SelectPlayersComponent,
+    ManagePlayersDialog,
+    ScorePlayersDialog,
+    DartboardComponent
+  ],
   entryComponents: [ManagePlayersDialog, ScorePlayersDialog],
   imports: [MaterialModule, BrowserAnimationsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
   exports: [],
