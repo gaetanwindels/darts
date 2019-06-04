@@ -31,13 +31,17 @@ mat-dialog-container {
     border-radius: 0!important;
 }
 
+.icon-home {
+    padding-right: 14px;
+}
+
 .example-icon {
     padding: 0 14px;
-  }
+}
   
-  .example-spacer {
+.example-spacer {
     flex: 1 1 auto;
-  }
+}
 
 .mat-raised-button, .mat-flat-button, .mat-stroked-button {
     border-radius: 0!important;
