@@ -121,12 +121,14 @@ export class DartboardComponent implements OnInit {
 
     // thin lines
     this.drawThinLines();
+
+    this.context.translate(0.5, 0.5);
   }
 
   private drawThinLines() {
     let radius = this.getRadius();
     this.context.strokeStyle = "#ababab";
-    this.context.lineWidth = 2;
+    this.context.lineWidth = 1;
 
     let posMultiplicators = [
       1,
@@ -174,16 +176,17 @@ export class DartboardComponent implements OnInit {
     let radian = startDegre * Math.PI / 180;
 
     for (let i = 0; i <= 20; i++) {
-      this.context.fillStyle = i & 1 ? color1 : color2;
+      this.context.fillStyle = i & 1 ? color2 : color1;
       let prevRadian = radian;
       radian = (startDegre + (i * 18)) * Math.PI / 180;
+      this.context.shadowColor = "#000000";
       this.context.beginPath();
       this.context.moveTo(this.canvas.width / 2, this.canvas.height / 2);
       this.context.arc(this.canvas.width / 2, this.canvas.height / 2, radius, prevRadian, radian);
       this.context.fill();
 
       this.context.strokeStyle = '#ababab';
-      this.context.lineWidth = 2;
+      this.context.lineWidth = 1;
       this.context.beginPath();
       let pointX = (Math.sin(radian) * (this.getRadius() * this.outerWidth));
       let pointY = (Math.cos(radian) * (this.getRadius() * this.outerWidth));
@@ -192,5 +195,4 @@ export class DartboardComponent implements OnInit {
       this.context.stroke();
     }
   }
-
 }

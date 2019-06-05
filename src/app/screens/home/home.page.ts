@@ -31,7 +31,8 @@ export class HomePage {
   }
 
   ngOnInit() {
-    let previousGame = this.storageService.getGameState();
+    //let previousGame = this.storageService.getGameState();
+    let previousGame = null;
     if (previousGame) {
       this.scores = previousGame.scores;
       this.currentScores = previousGame.currentScore;
